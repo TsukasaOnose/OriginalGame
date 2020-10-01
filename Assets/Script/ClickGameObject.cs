@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class ClickGameObject : MonoBehaviour
 {
-    //Rayを飛ばす距離
-    float maxDistance = 5f;
+    //アイテムを入れる変数
+    private GameObject item;
+    //アイテムを掴める距離（Rayを飛ばす距離）
+    private float armLength = 4f;
+    //持ったアイテムの距離
+    private float d = 1f;
     //LayerがItemの物のみを検出するようにする
-    int layerMask = 1 << 8;
-    //クリックしたオブジェクトを入れる変数
-    GameObject clickedGameObject;
+    private int layerMask = 1 << 8;
     //アイテムタグ
     public string itemTag = "ItemTag";
     //アイテムを持っているか
-    public bool haveItem = false;
+    private bool hold = false;
+    //アイテムの初期位置
+    Vector3 itemPos;
+
+    RaycastHit hit;
 
     // Update is called once per frame
     void Update()
@@ -26,40 +32,42 @@ public class ClickGameObject : MonoBehaviour
 
     public void ClickAction()
     {
-        //クリックした時、アイテムを持っていなければアイテムを保持する
-        if (Input.GetMouseButton(0))
-        {
-            clickedGameObject = null;
-
-            //カーソルの位置へRayを飛ばす
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
-
-            //Rayが接触したオブジェクトを取得し、ログに表示する
-            if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
+            //クリックした時
+            if (Input.GetMouseButton(0))
             {
-                clickedGameObject = hit.collider.gameObject;
-                if (clickedGameObject.CompareTag(itemTag) && haveItem == false)
-                {
-                    clickedGameObject.GetComponent<ItemController>().OnUserAction();
-                    clickedGameObject.GetComponent<Rigidbody>().useGravity = false;
-                    //アイテムを持っている状態にする
-                    haveItem = true;
+                item = null;
+                //カーソルの位置へRayを飛ばす
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                    Debug.Log(clickedGameObject);
+                //Rayが接触したオブジェクトを取得し、ログに表示する
+                if (Physics.Raycast(ray, out hit, armLength, layerMask))
+                {
+                    //クリックしたアイテムを取得
+                    item = hit.collider.gameObject;
+                //対象がアイテム且つ、アイテムを持っていない時
+                if (item.CompareTag(itemTag) && hold == false)
+                {
+                    //アイテムの初期位置を保存
+                    itemPos = item.transform.position;
+
+                    //目の前にアイテムを移動
+                    Vector3 itemNewPos = transform.position + transform.forward * d;
+                    item.transform.position = itemNewPos;
+
+                    //アイテムを持っている状態にする
+                    hold = true;
+
+                    Debug.Log(item);
                     Debug.Log("アイテムを持っている");
                 }
-                else if (clickedGameObject.CompareTag(itemTag) && haveItem == true)
+                //アイテムを持っていない時
+                else if (item.CompareTag(itemTag) && hold == true)
                 {
-                    clickedGameObject.GetComponent<Rigidbody>().useGravity = true;
-                    //アイテムを持っていない状態にする
-                    haveItem = false;
-                    Debug.Log(clickedGameObject);
-                    Debug.Log("アイテムを持っていない");
+                    item.transform.position = itemPos;
+                    hold = false;
                 }
 
+                }
             }
-        }
-
     }
 }

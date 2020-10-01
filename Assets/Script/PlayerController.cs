@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     {
         CharacterMove();
         LookX();
+
+        //カーソルを画面中央に固定する
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void CharacterMove()
