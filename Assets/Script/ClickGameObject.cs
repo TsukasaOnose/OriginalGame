@@ -27,7 +27,7 @@ public class ClickGameObject : MonoBehaviour
     public void ClickAction()
     {
         //クリックした時、アイテムを持っていなければアイテムを保持する
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             clickedGameObject = null;
 
