@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ItemController : MonoBehaviour
 {
-    Vector3 getItemPos;
-    Vector3 Pos;
+    public Vector3 getItemPos;
+    public Vector3 Pos;
 
     // Start is called before the first frame update
     void Start()

@@ -12,6 +12,8 @@ public class ClickGameObject : MonoBehaviour
     GameObject clickedGameObject;
     //アイテムタグ
     public string itemTag = "ItemTag";
+    //アイテムを持っているか
+    public bool haveItem = false;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +26,7 @@ public class ClickGameObject : MonoBehaviour
 
     public void ClickAction()
     {
-        //クリックした時、Rayを飛ばす
+        //クリックした時、アイテムを持っていなければアイテムを保持する
         if (Input.GetMouseButtonDown(0))
         {
             clickedGameObject = null;
@@ -37,12 +39,27 @@ public class ClickGameObject : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
             {
                 clickedGameObject = hit.collider.gameObject;
-                if(clickedGameObject.CompareTag(itemTag))
+                if (clickedGameObject.CompareTag(itemTag) && haveItem == false)
                 {
                     clickedGameObject.GetComponent<ItemController>().OnUserAction();
+                    clickedGameObject.GetComponent<Rigidbody>().useGravity = false;
+                    //アイテムを持っている状態にする
+                    haveItem = true;
+
+                    Debug.Log(clickedGameObject);
+                    Debug.Log("アイテムを持っている");
                 }
+                else if (clickedGameObject.CompareTag(itemTag) && haveItem == true)
+                {
+                    clickedGameObject.GetComponent<Rigidbody>().useGravity = true;
+                    //アイテムを持っていない状態にする
+                    haveItem = false;
+                    Debug.Log(clickedGameObject);
+                    Debug.Log("アイテムを持っていない");
+                }
+
             }
-            Debug.Log(clickedGameObject);
         }
+
     }
 }
