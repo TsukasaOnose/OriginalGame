@@ -65,7 +65,19 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "GoalTag")
         {
-            GameObject.Find(StageController.STR).GetComponent<StageController>().ChangeScene();
+            GameObject.Find(StageController.STR).GetComponent<StageController>().GoHouse();
+        }
+        else if (other.gameObject.tag == "GoToForestTag")
+        {
+            GameObject.Find(StageController.STR).GetComponent<StageController>().GoForest();
+        }
+        else if (other.gameObject.tag == "GoToMainScene")
+        {
+            GameObject.Find(StageController.STR).GetComponent<StageController>().GoMainScene();
+        }
+        else if (other.gameObject.tag == "GoToMainSceneNight")
+        {
+            GameObject.Find(StageController.STR).GetComponent<StageController>().GoNightRoad();
         }
     }
 }

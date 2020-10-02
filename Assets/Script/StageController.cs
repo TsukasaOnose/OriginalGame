@@ -13,7 +13,7 @@ public class StageController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (playerObj !=null && startPosition != null )
+        if (playerObj != null && startPosition != null)
         {
             playerObj.transform.position = startPosition.transform.position;
             playerObj.transform.Rotate(0, 90, 0);
@@ -26,9 +26,24 @@ public class StageController : MonoBehaviour
 
     }
 
-    public void ChangeScene()
+    public void GoHouse()
     {
         //SampleSceneを読み込む
         SceneManager.LoadScene("InMyHouse");
+    }
+    public void GoForest()
+    {
+        //InForestを読み込む
+        SceneManager.LoadScene("InForest");
+    }
+    public void GoMainScene()
+    {
+        //SampleSceneを読み込む
+        SceneManager.LoadScene("MainScene");
+    }
+    public void GoNightRoad()
+    {
+        //NightRoadを読み込む
+        SceneManager.LoadScene("NightRoad");
     }
 }

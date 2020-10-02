@@ -17,7 +17,7 @@ public class ItemScript : MonoBehaviour
     void Update()
     {
         //アイテムを持ち上げている時
-        if (hold)
+        if (hold == true)
         {
             //Eキーでアイテムを置く
             if(Input.GetMouseButtonDown(0))
@@ -30,7 +30,7 @@ public class ItemScript : MonoBehaviour
             }
         }
         //アイテムを持ち上げていない時
-        else
+        else if (hold == false)
         {
             if (Physics.Raycast(transform.position,transform.forward, out hit, armLength))
             {

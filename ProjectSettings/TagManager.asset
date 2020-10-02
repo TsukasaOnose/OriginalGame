@@ -6,6 +6,9 @@ TagManager:
   tags:
   - GoalTag
   - ItemTag
+  - PlayerTag
+  - GoToForestTag
+  - GoToMainSceneTag
   layers:
   - Default
   - TransparentFX
