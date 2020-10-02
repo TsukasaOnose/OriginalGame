@@ -32,20 +32,28 @@ public class ClickGameObject : MonoBehaviour
 
     public void ClickAction()
     {
-            //クリックした時
-            if (Input.GetMouseButton(0))
-            {
-                item = null;
-                //カーソルの位置へRayを飛ばす
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //クリックした時
+        if (Input.GetMouseButtonDown(0))
+        {
+            //カーソルの位置へRayを飛ばす
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                //Rayが接触したオブジェクトを取得し、ログに表示する
-                if (Physics.Raycast(ray, out hit, armLength, layerMask))
-                {
-                    //クリックしたアイテムを取得
-                    item = hit.collider.gameObject;
+            //アイテムを持っている時
+            if (item != null && item.CompareTag(itemTag) && hold == true)
+            {
+                item.transform.position = itemPos;
+                hold = false;
+                item = null;
+                return;
+            }
+
+            //Rayが接触したオブジェクトを取得し、ログに表示する
+            if (Physics.Raycast(ray, out hit, armLength, layerMask))
+            {
+                //クリックしたアイテムを取得
+                item = hit.collider.gameObject;
                 //対象がアイテム且つ、アイテムを持っていない時
-                if (item.CompareTag(itemTag) && hold == false)
+                if (item == null && item.CompareTag(itemTag) && hold == false)
                 {
                     //アイテムの初期位置を保存
                     itemPos = item.transform.position;
@@ -60,14 +68,10 @@ public class ClickGameObject : MonoBehaviour
                     Debug.Log(item);
                     Debug.Log("アイテムを持っている");
                 }
-                //アイテムを持っていない時
-                else if (item.CompareTag(itemTag) && hold == true)
-                {
-                    item.transform.position = itemPos;
-                    hold = false;
-                }
-
-                }
             }
+           
+        }
+
+
     }
 }
