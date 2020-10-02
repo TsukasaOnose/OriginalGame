@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InMyHouse.unity
     guid: ba2aeed445fd6bf4384f9b57ff8aaf3c
+  - enabled: 1
+    path: Assets/Scenes/NightRoad.unity
+    guid: 8a8ebc9b1ee3a1140bcf500812bc6adc
+  - enabled: 1
+    path: Assets/Scenes/InForest.unity
+    guid: f847022d834c7bd488c5685c286c4291
+  - enabled: 1
+    path: Assets/Scenes/Load1.unity
+    guid: e9bd9b1d8258f19499a273256efaea88
   m_configObjects: {}

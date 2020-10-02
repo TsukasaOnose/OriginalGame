@@ -20,11 +20,6 @@ public class StageController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void GoHouse()
     {
@@ -45,5 +40,10 @@ public class StageController : MonoBehaviour
     {
         //NightRoadを読み込む
         SceneManager.LoadScene("NightRoad");
+    }
+    public void Loading()
+    {
+        //Load1を読み込む
+        SceneManager.LoadScene("Load1");
     }
 }
