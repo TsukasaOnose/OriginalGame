@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TimeDisplay : MonoBehaviour
 {
-    private int minute = 0;
-    private float second = 0f;
+    static int minute = 0;
+    static float second = 0f;
     private GameObject timeText;
 
     public static readonly string Timetext = "Time Text";

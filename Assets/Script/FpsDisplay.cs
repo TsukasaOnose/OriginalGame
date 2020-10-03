@@ -16,6 +16,10 @@ public class FpsDisplay : MonoBehaviour
 
     public static readonly string FPStext = "FPS Text";
 
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +38,12 @@ public class FpsDisplay : MonoBehaviour
         //1秒毎にfpsを算出する
         if (time >= 1f)
         {
-            fps = frameCount / time;
+            fps = frameCount;
             frameCount = 0;
             prevTime = Time.realtimeSinceStartup;
-        }
 
-        //FPSをUIに表示
-        fpsText.GetComponent<Text>().text = fps.ToString("F1");
+            //FPSをUIに表示
+            fpsText.GetComponent<Text>().text = fps.ToString("F1");
+        }
     }
 }
