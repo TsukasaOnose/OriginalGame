@@ -21,10 +21,10 @@ public class TimeDisplay : MonoBehaviour
     void Update()
     {
         second += Time.deltaTime;
-        if (second >= 60f)
+        if (second > 59f)
         {
             minute++;
-            second = -60;
+            second = 0f;
         }
 
         //TimeをUIに表示

@@ -18,8 +18,15 @@ public class ClickGameObject : MonoBehaviour
     private bool hold = false;
     //アイテムの初期位置
     Vector3 itemPos;
+    //アイテムを落とす位置
+    private Vector3 dumpPos;
 
     RaycastHit hit;
+
+    private void Start()
+    {
+        dumpPos = GameObject.Find("Player").transform.position;
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,12 +39,12 @@ public class ClickGameObject : MonoBehaviour
 
     public void ClickAction()
     {
+        //カーソルの位置へRayを飛ばす
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         //クリックした時
         if (Input.GetMouseButtonDown(0))
         {
-            //カーソルの位置へRayを飛ばす
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
             //アイテムを持っている時
             if (item != null && item.CompareTag(itemTag) && hold == true)
             {
@@ -69,7 +76,7 @@ public class ClickGameObject : MonoBehaviour
                     Debug.Log("アイテムを持っている");
                 }
             }
-           
+
         }
 
 
